@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./server/server.js --exec babel-node"
+    "dev": "nodemon ./server/server.js --exec babel-node --ignore './clinet'"
   },
   "repository": {
     "type": "git",
@@ -18,13 +18,18 @@
   },
   "homepage": "https://github.com/ksdjx1/Racre-s-Blog#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.4.1",
+    "history": "^5.0.0",
     "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^11.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
@@ -32,7 +37,6 @@
     "@babel/node": "^7.13.12",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.13.12",
-    "babel-loader": "^8.2.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7"
   }
