@@ -1,9 +1,10 @@
 import React, {Fragment, useState, useCallback, useEffect} from 'react'
-import {Navbar, Container, NavbarToggler, Collapse, Nav} from 'reactstrap'
+import {Navbar, Container, NavbarToggler, Collapse, Nav, NavItem, Form, Button} from 'reactstrap'
 import {Link} from 'react-router-dom'
 import LoginModal from '../components/auth/LoginModal'
 import {useSelector, useDispatch} from 'react-redux'
 import { LOGOUT_REQUEST } from '../redux/types'
+import RegisterModal from './auth/RegisterModal'
 
 const AppNavbar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -25,6 +26,59 @@ const AppNavbar = () => {
         setIsOpen(!isOpen)
     }
 
+    const addPostClick = () => {
+
+    }
+
+    const authLink = (
+        <Fragment>
+            <NavItem>
+                {userRole === 'Main' ? (
+                    <Form className='col mt-2'>
+                        <Link to='post' className='btn btn-success block text-white px-3' onClick={addPostClick}>
+                            Add Post
+                        </Link>
+                    </Form>
+                ): ''}
+            </NavItem>
+            <NavItem className='d-flex justify-content-center'>
+                <Form className='col mt-2'>
+                    {user && user.name ? (
+                        <Link>
+                            <Button outline color='light' className='px-3' block>
+                                <strong>{user ? `Welcome ${user.name}` :''}</strong>
+                            </Button>
+                        </Link>
+                    ): (
+                        <Button outline color='light' className='px-3' block>
+                            <strong>No User</strong>
+                        </Button>
+                    )}
+                </Form>
+            </NavItem>
+            <NavItem>
+                <Form className='col'>
+                    <Link onClick={onLogout} to='#'>
+                        <Button outline color='light' className='mt-2' block>
+                            Logout
+                        </Button>
+                    </Link>
+                </Form>
+            </NavItem>
+        </Fragment>
+    )
+
+    const guestLink = (
+        <Fragment>
+            <NavItem>
+                <RegisterModal/>
+            </NavItem>
+            <NavItem>
+                <LoginModal />
+            </NavItem>
+        </Fragment>
+    )
+
     return (
         <Fragment>
             <Navbar color="dark" expand='lg' className='sticky-top'>
@@ -36,9 +90,9 @@ const AppNavbar = () => {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto d-flex justify-content-around" navbar>
                             {isAuthenticated ? (
-                                <h1 className='text-white'>authLink</h1>
+                                authLink
                                 ) : (
-                                <LoginModal/>
+                                guestLink
                             )}
                         </Nav>
                     </Collapse>
