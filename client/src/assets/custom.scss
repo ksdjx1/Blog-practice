@@ -14,7 +14,7 @@
 }
 
 #main-body {
-  min-width: 90vh;
+  min-height: 90vh;
 }
 
 .card-img-top {
@@ -46,4 +46,8 @@
 html {
   width: 100vw;
   overflow-x: hidden;
+}
+
+textarea {
+  resize: none;
 }

@@ -39,7 +39,7 @@ const uploadPostAPI = (payload) => {
     if (token) {
         config.headers['x-auth-token'] = token
     }
-    return axios.post('apl/post', payload, config)
+    return axios.post('api/post', payload, config)
 }
 
 function* uploadPosts(action) {
@@ -66,11 +66,11 @@ function* watchuploadPosts() {
 }
 
 //post detail
-const loadPostDetailAPI = () => {
+const loadPostDetailAPI = (payload) => {
     return axios.get(`api/post/${payload}`)
 }
 
-function* loadPostDetail() {
+function* loadPostDetail(action) {
     try {
         const result = yield call(loadPostDetailAPI, action.payload)
         yield put({
