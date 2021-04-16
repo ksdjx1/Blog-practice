@@ -90,6 +90,50 @@ function* watchloadPostDetail() {
     yield takeEvery(POST_DETAIL_LOADING_REQUEST, loadPostDetail)
 }
 
+//post delete
+const DeletePostAPI = (payload) => {
+    const config = {
+        headers: {
+            "Content-Type":"application/json"
+        }
+    }
+    return axios.get(`api/post/${payload}`)
+}
+
+function* DeletePost(action) {
+    try {
+        const result = yield call(DeletePostAPI, action.payload)
+        const config = {
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }
+        yield put({
+            type: POST_DETAIL_LOADING_SUCCESS,
+            payload: result.data
+        })
+    } catch(e){
+        yield put({
+            type: POST_DETAIL_LOADING_FAILURE,
+            payload: e
+        })
+        yield put(push('/'))
+    }
+}
+
+function* watchDeletePost() {
+    const config = {
+        headers: {
+            "Content-Type":"application/json"
+        }
+    }
+    yield takeEvery(POST_DETAIL_LOADING_REQUEST, DeletePost)
+    const config = {
+        headers: {
+            "Content-Type":"application/json"
+        }
+    }
+}
 
 
 export default function* postSaga() {
